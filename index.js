@@ -10,7 +10,7 @@ let GPT_MODE = process.env.GPT_MODE
 let HISTORY_LENGTH = process.env.HISTORY_LENGTH
 let OPENAI_API_KEY = process.env.OPENAI_API_KEY
 let MODEL_NAME = process.env.MODEL_NAME
-
+let mao_res = "error??"
 if (!GPT_MODE) {
     GPT_MODE = "CHAT"
 }
@@ -121,6 +121,7 @@ app.get('/gpt/:text', async (req, res) => {
                 sliced_agent_response = agent_response
             }
             res.send(sliced_agent_response)
+            mao_res = sliced_agent_response
         } else {
             res.send("Something went wrong. Try again later!")
         }
@@ -155,6 +156,7 @@ app.get('/gpt/:text', async (req, res) => {
                 sliced_agent_response = agent_response
             }
             res.send(sliced_agent_response)
+            mao_res = sliced_agent_response
         } else {
             res.send("Something went wrong. Try again later!")
         }
@@ -180,6 +182,9 @@ app.all('/continue/', (req, res) => {
     else {
         res.send("No message to continue. Please send a new message first.")
     }
+})
+app.all('/aa/', (req, res) => {
+        res.send(new_user_message)
 })
 
 app.listen(process.env.PORT || 3000)
