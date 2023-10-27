@@ -184,7 +184,7 @@ app.all('/continue/', (req, res) => {
     }
 })
 app.all('/aa/', (req, res) => {
-        res.send(new_user_message)
+        res.send(mao_res)
 })
 
 app.listen(process.env.PORT || 3000)
