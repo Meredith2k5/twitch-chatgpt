@@ -107,8 +107,8 @@ app.get('/gpt/:text', async (req, res) => {
             } else {
                 sliced_agent_response = agent_response
             }
-            res.send(sliced_agent_response)
             mao_res = sliced_agent_response
+            res.send(sliced_agent_response)
         } else {
             res.send("Something went wrong. Try again later!")
         }
@@ -139,8 +139,8 @@ app.get('/gpt/:text', async (req, res) => {
             } else {
                 sliced_agent_response = agent_response
             }
-            res.send(sliced_agent_response)
             mao_res = sliced_agent_response
+            res.send(sliced_agent_response)
         } else {
             res.send("Something went wrong. Try again later!")
         }
@@ -157,6 +157,7 @@ app.all('/continue/', (req, res) => {
         }
         // save the other part of the message for the next response
         last_user_message = last_user_message.slice(MAX_LENGTH)
+        mao_res = new_user_message
         res.send(new_user_message)
     }
     else {
