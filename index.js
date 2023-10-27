@@ -51,7 +51,6 @@ if (process.env.GPT_MODE === "CHAT"){
     fs.readFile("./file_context.txt", 'utf8', function(err, data) {
         if (err) throw err;
         file_context = data;
-        console.log(file_context);
     });
 
 }
@@ -75,7 +74,6 @@ app.get('/gpt/:text', async (req, res) => {
         //Add user message to  messages
         messages.push({role: "user", content: text})
         //Check if message history is exceeded
-        console.log("Conversations in History: " + ((messages.length / 2) -1) + "/" + process.env.HISTORY_LENGTH)
         if(messages.length > ((process.env.HISTORY_LENGTH * 2) + 1)) {
             messages.splice(1,2)
         }
@@ -94,10 +92,8 @@ app.get('/gpt/:text', async (req, res) => {
 
         if (response.data.choices) {
             let agent_response = response.data.choices[0].message.content
-
-            console.log ("Agent answer: " + agent_response)
             messages.push({role: "assistant", content: agent_response})
-
+            
             //Check for Twitch max. chat message length limit and slice if needed
             let sliced_agent_response = ""
             if(agent_response.length > MAX_LENGTH){
@@ -116,8 +112,7 @@ app.get('/gpt/:text', async (req, res) => {
     } else {
         //PROMPT MODE EXECUTION
         const prompt = file_context + "\n\nQ:" + text + "\nA:";
-        console.log("User Input: " + text)
-
+        
         const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: prompt,
@@ -148,6 +143,9 @@ app.get('/gpt/:text', async (req, res) => {
 
 })
 
+app.all('/aa/', (req, res) => {
+        res.send(mao_res)
+})
 app.all('/continue/', (req, res) => {
     // Return the rest of the sliced answer from the last request
     if (last_user_message.length > 0) {
@@ -163,9 +161,6 @@ app.all('/continue/', (req, res) => {
     else {
         res.send("No message to continue. Please send a new message first.")
     }
-})
-app.all('/aa/', (req, res) => {
-        res.send(mao_res)
 })
 
 app.listen(process.env.PORT || 3000)
