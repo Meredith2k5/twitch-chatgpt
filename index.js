@@ -159,7 +159,7 @@ app.all('/continue/', (req, res) => {
         res.send(new_user_message)
     }
     else {
-        res.send("No message to continue. Please send a new message first.")
+        res.send("No message to continue.")
     }
 })
 
