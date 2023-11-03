@@ -10,7 +10,7 @@ let GPT_MODE = process.env.GPT_MODE
 let HISTORY_LENGTH = process.env.HISTORY_LENGTH
 let OPENAI_API_KEY = process.env.OPENAI_API_KEY
 let MODEL_NAME = process.env.MODEL_NAME
-let mao_res = "wait ~25sec > !gpt?"
+let mao_res = "wait ~25sec > !continue"
 if (!GPT_MODE) {
     GPT_MODE = "CHAT"
 }
