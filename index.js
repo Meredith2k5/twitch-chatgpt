@@ -159,3 +159,8 @@ app.all('/continue/', (req, res) => {
         res.send(new_user_message)
     }
     else {
+        res.send("No message to continue.")
+    }
+})
+
+app.listen(process.env.PORT || 3000)
