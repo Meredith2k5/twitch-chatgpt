@@ -11,6 +11,7 @@ let HISTORY_LENGTH = process.env.HISTORY_LENGTH
 let OPENAI_API_KEY = process.env.OPENAI_API_KEY
 let MODEL_NAME = process.env.MODEL_NAME
 let mao_res = "wait ~25sec > !gpt?"
+
 if (!GPT_MODE) {
     GPT_MODE = "CHAT"
 }
@@ -160,6 +161,15 @@ app.all('/continue/', (req, res) => {
     }
     else {
         res.send("No message to continue.")
+        let mao_res = "wait ~25sec > !gptr"
+//save response:
+mao_res = sliced_agent_response
+res.send(sliced_agent_response)
+
+//repeat response:
+app.all('/repeat/', (req, res) => {
+res.send(mao_res)
+})
     }
 })
 
