@@ -161,6 +161,16 @@ app.get('/gpt/:text', async (req, res) => {
     }
 
 })
+let mao_res = "wait ~25sec > !repeat"
+//save response:
+mao_res = sliced_agent_response
+res.send(sliced_agent_response)
+
+//repeat response:
+app.all('/repeat/', (req, res) => {
+res.send(mao_res)
+})
+
 
 app.all('/continue/', (req, res) => {
     console.log(last_user_message)
@@ -182,14 +192,6 @@ app.all('/continue/', (req, res) => {
     }
 })
 
-let mao_res = "wait ~25sec > !gptr"
-//save response:
-mao_res = sliced_agent_response
-res.send(sliced_agent_response)
 
-//repeat response:
-app.all('/repeat/', (req, res) => {
-res.send(mao_res)
-})
 
 app.listen(process.env.PORT || 3000)
