@@ -10,7 +10,7 @@ let GPT_MODE = process.env.GPT_MODE
 let HISTORY_LENGTH = process.env.HISTORY_LENGTH
 let OPENAI_API_KEY = process.env.OPENAI_API_KEY
 let MODEL_NAME = process.env.MODEL_NAME
-let mao_res = "wait ~25sec > !repeat"
+let mao_res = "wait ~25sec > !gpt?"
 if (!GPT_MODE) {
     GPT_MODE = "CHAT"
 }
@@ -159,8 +159,3 @@ app.all('/continue/', (req, res) => {
         res.send(new_user_message)
     }
     else {
-        res.send("No message to continue.")
-    }
-})
-
-app.listen(process.env.PORT || 3000)
